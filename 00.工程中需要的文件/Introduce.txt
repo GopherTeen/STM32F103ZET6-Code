@@ -1,0 +1,17 @@
+用 STM32CubeMX 生成 CMake 项目即可，这些是 VSCode 或者 CLion 需要的文件。
+（VSCode 里面的 clang-format 可能需要注释掉 Language: Cpp 这一行）
+
+
+VSCode  CubeMX中选择CMake：
+
+如果需要支持串口浮点打印和去除一些不必要的 warning，可以在 cmake/gcc-arm-none-eabi.cmake 文件中添加如下命令：
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -u _printf_float")  # 支持 printf 函数打印浮点数
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -lm")  # 链接数学库 libm
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,--gc-sections,--no-warn-rwx-segments")  # 取消 rwx 段的警告
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-parameter")  # 忽略 C 代码中未使用参数的警告
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")  # 忽略 C++ 代码中未使用参数的警告
+
+
+CLion  CubeMX中选择STM32CubeIDE：
+支持串口浮点数的打印：
+set(COMMON_FLAGS "-specs=nosys.specs -specs=nano.specs -u _printf_float")
