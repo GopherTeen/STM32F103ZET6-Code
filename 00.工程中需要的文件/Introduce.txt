@@ -15,3 +15,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")  # 忽略 C++ �
 CLion  CubeMX中选择STM32CubeIDE：
 支持串口浮点数的打印：
 set(COMMON_FLAGS "-specs=nosys.specs -specs=nano.specs -u _printf_float")
+
+
+VSCode 中选择 Make 工程：
+
+重定向printf要想输出浮点数，需要在Makefile文件中找到LDFLAGS这一行，在后面加上-u _printf_float，
+例：LDFLAGS = $(MCU) -u _printf_float -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections

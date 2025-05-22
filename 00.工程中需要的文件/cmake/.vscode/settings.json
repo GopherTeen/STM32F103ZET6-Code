@@ -1,0 +1,29 @@
+{
+    "clangd.arguments": [
+        "--query-driver=D:/STM32/Tools/arm-gnu-toolchain/bin/arm-none-eabi-gcc.exe", // 指定编译器路径
+        "--clang-tidy"
+    ],
+    "VsCodeTaskButtons.showCounter": true,
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "$(notebook-delete-cell) & $(tools)",
+            "task": "rebuild",
+            "tooltip": "🧹 & 🛠️"
+        },
+        {
+            "label": "$(tools) Build",
+            "task": "build",
+            "tooltip": "🛠️ build"
+        },
+        {
+            "label": "$(notebook-delete-cell) Clean",
+            "task": "clean",
+            "tooltip": "🧹 clean"
+        },
+        {
+            "label": "$(zap) Flash",
+            "task": "flash",
+            "tooltip": "⚡ flash"
+        }
+    ]
+}

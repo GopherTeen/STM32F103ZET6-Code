@@ -1,0 +1,30 @@
+{
+    "VsCodeTaskButtons.showCounter": true,
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "$(tools) Build",
+            "task": "build",
+            "tooltip": "🛠️ build"
+        },
+        {
+            "label": "$(notebook-delete-cell) Clean",
+            "task": "clean",
+            "tooltip": "🧹 clean"
+        },
+        {
+            "label": "$(notebook-delete-cell) & $(tools)",
+            "task": "rebuild",
+            "tooltip": "🧹 & 🛠️"
+        },
+        {
+            "label": "$(zap) Flash",
+            "task": "flash",
+            "tooltip": "⚡ flash"
+        }
+    ],
+    "files.associations": {
+        "main.h": "c",
+        "stm32f1xx_hal.h": "c",
+        "stm32f1xx_hal_conf.h": "c"
+    },
+}

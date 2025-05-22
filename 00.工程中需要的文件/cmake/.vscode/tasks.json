@@ -1,0 +1,61 @@
+{
+    "tasks": [
+        // 重新编译任务
+        {
+            "type": "shell",
+            "label": "rebuild",
+            "group": "build",
+            "dependsOn": [
+                "clean",
+                "build"
+            ]
+        },
+        // 编译任务
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/Debug",
+                "--target",
+                "${workspaceRootFolderName}",
+                "--config",
+                "Debug"
+            ],
+            "group": "build"
+        },
+        // 清理任务
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/Debug",
+                "--target",
+                "clean",
+            ],
+            "group": "build"
+        },
+        // 烧录任务
+        {
+            "type": "shell",
+            "label": "flash",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "interface/stlink.cfg",
+                "-f",
+                "target/stm32f1x.cfg",
+                "-c",
+                "program build/Debug/${workspaceRootFolderName}.elf verify reset exit"
+            ],
+            "group": "build",
+            "dependsOn": [
+                "build"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}

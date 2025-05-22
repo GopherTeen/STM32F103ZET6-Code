@@ -1,0 +1,50 @@
+{
+    "tasks": [
+        // 编译任务
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "make -j 12",
+            "args": [],
+            "group": "build"
+        },
+        // 清理任务
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "make clean",
+            "args": [],
+            "group": "build"
+        },
+        // 重新编译任务
+        {
+            "type": "shell",
+            "label": "rebuild",
+            "command": "make -j 12",
+            "args": [],
+            "group": "build",
+            "dependsOn": [
+                "clean"
+            ]
+        },
+        // 烧录任务
+        {
+            "type": "shell",
+            "label": "flash",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "interface/stlink.cfg",
+                "-f",
+                "target/stm32f1x.cfg",
+                "-c",
+                "program build/${workspaceRootFolderName}.elf verify reset exit"
+            ],
+            "group": "build",
+            "dependsOn": [
+                "build"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}
