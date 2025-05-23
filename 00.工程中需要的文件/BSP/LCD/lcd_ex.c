@@ -1,4 +1,4 @@
-#include "../Core/Inc/lcd.h"
+#include "lcd.h"
 
 /**
  * @brief       ST7789 寄存器初始化代码

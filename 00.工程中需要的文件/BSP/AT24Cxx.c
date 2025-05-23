@@ -1,6 +1,6 @@
 #include "AT24cxx.h"
 
-#include "I2C.h"
+#include "IIC.h"
 #include "stm32f1xx_hal.h"
 
 /**

@@ -1,8 +1,24 @@
-用 STM32CubeMX 生成 CMake 项目即可，这些是 VSCode 或者 CLion 需要的文件。
-（VSCode 里面的 clang-format 可能需要注释掉 Language: Cpp 这一行）
+VSCode CMake 工程：
 
+# Add sources to executable
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user sources here
+    Drivers/BSP/IIC/IIC.c
+    Drivers/BSP/KEY/key.c
+    Drivers/BSP/LCD/lcd.c
+    Drivers/BSP/TPAD/tpad.c
+    Drivers/BSP/AT24Cxx.c
+)
 
-VSCode  CubeMX中选择CMake：
+# Add include paths
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user defined include paths
+    Drivers/BSP/IIC/
+    Drivers/BSP/KEY/
+    Drivers/BSP/LCD/
+    Drivers/BSP/TPAD/
+    Drivers/BSP/
+)
 
 如果需要支持串口浮点打印和去除一些不必要的 warning，可以在 cmake/gcc-arm-none-eabi.cmake 文件中添加如下命令：
 set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -u _printf_float")  # 支持 printf 函数打印浮点数
@@ -11,13 +27,13 @@ set(CMAKE_EXE_LINKER_FLAGS "-Wl,--gc-sections,--no-warn-rwx-segments")  # 取消
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-parameter")  # 忽略 C 代码中未使用参数的警告
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")  # 忽略 C++ 代码中未使用参数的警告
 
+CLion  STM32CubeIDE 工程：
 
-CLion  CubeMX中选择STM32CubeIDE：
 支持串口浮点数的打印：
 set(COMMON_FLAGS "-specs=nosys.specs -specs=nano.specs -u _printf_float")
 
 
-VSCode 中选择 Make 工程：
+VSCode Make 工程：
 
 重定向printf要想输出浮点数，需要在Makefile文件中找到LDFLAGS这一行，在后面加上-u _printf_float，
 例：LDFLAGS = $(MCU) -u _printf_float -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections

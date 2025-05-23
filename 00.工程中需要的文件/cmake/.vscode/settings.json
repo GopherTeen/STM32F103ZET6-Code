@@ -1,7 +1,18 @@
 {
     "clangd.arguments": [
         "--query-driver=D:/STM32/Tools/arm-gnu-toolchain/bin/arm-none-eabi-gcc.exe", // 指定编译器路径
-        "--clang-tidy"
+        "--clang-tidy",
+        "--log=verbose",
+        "--pretty",
+        "--all-scopes-completion",
+        "--header-insertion=never",
+        "--background-index", // 后台自动分析文件
+        "--completion-style=detailed",
+        // "--completion-style=bundled", // 打包（重载函数只给出一个建议）
+        "--pch-storage=memory",
+        // "--compile-commands-dir=${workspaceFolder}/build",
+        // "--compile-commands-dir=build",
+        "--function-arg-placeholders=false"
     ],
     "VsCodeTaskButtons.showCounter": true,
     "VsCodeTaskButtons.tasks": [

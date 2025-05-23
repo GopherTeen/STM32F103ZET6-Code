@@ -1,6 +1,5 @@
 #include "tpad.h"
 
-#include "stm32f1xx_hal.h"
 #include "tim.h"
 
 // 空载的时候(没有手按下),计数器需要的时间（这个值应该在每次开机的时候被初始化一次）
